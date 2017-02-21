@@ -51,9 +51,9 @@
 		3EA72B271E5CD3C600202268 /* Follow */ = {
 			isa = PBXGroup;
 			children = (
-				3EA72B281E5CD3C600202268 /* Controller */,
 				3EA72B291E5CD3C600202268 /* Model */,
 				3EA72B2A1E5CD3C600202268 /* View */,
+				3EA72B281E5CD3C600202268 /* Controller */,
 			);
 			path = Follow;
 			sourceTree = "<group>";
@@ -82,9 +82,9 @@
 		3EA72B2B1E5CD3C600202268 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				3EA72B2C1E5CD3C600202268 /* Controller */,
 				3EA72B2D1E5CD3C600202268 /* Model */,
 				3EA72B2E1E5CD3C600202268 /* View */,
+				3EA72B2C1E5CD3C600202268 /* Controller */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -113,9 +113,9 @@
 		3EA72B2F1E5CD3C600202268 /* Live */ = {
 			isa = PBXGroup;
 			children = (
-				3EA72B301E5CD3C600202268 /* Controller */,
 				3EA72B311E5CD3C600202268 /* Model */,
 				3EA72B321E5CD3C600202268 /* View */,
+				3EA72B301E5CD3C600202268 /* Controller */,
 			);
 			path = Live;
 			sourceTree = "<group>";
@@ -144,9 +144,9 @@
 		3EA72B331E5CD3C600202268 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				3EA72B341E5CD3C600202268 /* Controller */,
 				3EA72B351E5CD3C600202268 /* Model */,
 				3EA72B361E5CD3C600202268 /* View */,
+				3EA72B341E5CD3C600202268 /* Controller */,
 			);
 			path = Main;
 			sourceTree = "<group>";
