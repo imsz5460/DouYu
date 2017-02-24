@@ -8,13 +8,18 @@
 
 import UIKit
 
+// MARK:- 定义协议
+protocol PageTitleViewDelegate: class {
+    func pageTitleView(titleView : PageTitleView, selectedIndex: Int)
+}
+
 // MARK:- 定义常量
 let kButtomLineH: CGFloat = 2.0
 private let kSelectedColor : (CGFloat, CGFloat, CGFloat) = (255, 128, 0)
 private let kNormalColor : (CGFloat, CGFloat, CGFloat) = (85, 85, 85)
 
 class PageTitleView: UIView {
-    
+   weak var delegate: PageTitleViewDelegate?
    private var currentIndex: Int = 0
    private var titles: [String]
    private lazy var titleLabels: [UILabel] = [UILabel]()
@@ -143,7 +148,56 @@ extension PageTitleView {
         
         // 4.保存最新Label的下标值
         currentIndex = currentLabel.tag
+        
+        // 5.通知代理
+        delegate?.pageTitleView(self, selectedIndex: currentIndex)
   }
 }
+
+// MARK:- 对外暴露的方法
+extension PageTitleView {
+    func changeLabel(progress: CGFloat) {
+        
+        var sourceLabelIndex = Int(floor(progress))
+        let ratio = progress - CGFloat(sourceLabelIndex)
+        
+        //获取sourceLabel和targetLabel
+        let sourceLabel = titleLabels[sourceLabelIndex]
+        
+        if sourceLabelIndex >= 3{
+            sourceLabelIndex = 3
+        }
+        
+        print("sourceLabelIndex = \(sourceLabelIndex)")
+        var targetIndex = sourceLabelIndex + 1
+        if targetIndex >= 3{
+            targetIndex = 3
+        }
+        print("targetIndex = \(targetIndex)")
+        let targetLabel = titleLabels[targetIndex]
+        
+        //滑块的逻辑
+        let moveTotalX = sourceLabel.frame.width
+        let moveX = moveTotalX * ratio
+        
+        scrollLine.frame.origin.x = sourceLabel.frame.origin.x + moveX
+        
+        //3.Label颜色的渐变
+        // 3.1.取出变化的范围
+        let colorDelta = (kSelectedColor.0 - kNormalColor.0, kSelectedColor.1 - kNormalColor.1, kSelectedColor.2 - kNormalColor.2)
+        
+        if sourceLabelIndex != targetIndex {
+        // 3.2.变化sourceLabel
+        sourceLabel.textColor = UIColor(r: kSelectedColor.0 - colorDelta.0 * ratio, g: kSelectedColor.1 - colorDelta.1 * ratio, b: kSelectedColor.2 - colorDelta.2 * ratio)
+        
+        // 3.2.变化targetLabel
+        targetLabel.textColor = UIColor(r: kNormalColor.0 + colorDelta.0 * ratio, g: kNormalColor.1 + colorDelta.1 * ratio, b: kNormalColor.2 + colorDelta.2 * ratio)
+        }
+        
+        // 4.记录最新的index
+        currentIndex = sourceLabelIndex
+    }
+}
+
 
 

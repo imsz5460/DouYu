@@ -20,6 +20,7 @@ class HomeViewController: UIViewController {
         let titles = ["推荐", "游戏", "娱乐", "趣玩"]
         let titleView = PageTitleView(frame: titleFrame, titles: titles )
         
+        titleView.delegate = self
         return titleView
     }()
     
@@ -39,6 +40,8 @@ class HomeViewController: UIViewController {
         
     
     let contentview = PageContentView(frame: contentFrame, childVcs: childVcs, parentVc: self)
+        contentview.delegate = self
+
         
         return contentview
     
@@ -79,5 +82,20 @@ extension HomeViewController {
         let qrCodeItem = UIBarButtonItem(imageName: "Image_scan", highImageName: "Image_scan_click", size: size)
         navigationItem.rightBarButtonItems = [historyItem, searchItem, qrCodeItem]
         
+    }
+}
+
+// MARK:- 遵守PageTitleViewDelegate协议
+extension HomeViewController : PageTitleViewDelegate {
+    func pageTitleView(titleView : PageTitleView, selectedIndex: Int) {
+        pageContentView.setCurrentIndex(selectedIndex)
+    }
+}
+
+
+// MARK:- 遵守PageContentViewDelegate协议
+extension HomeViewController : PageContentViewDelegate {
+    func pageContentView(contentView : PageContentView, progress: CGFloat) {
+        pageTitleView.changeLabel(progress)
     }
 }
