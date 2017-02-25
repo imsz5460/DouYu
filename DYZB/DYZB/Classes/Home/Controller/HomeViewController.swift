@@ -31,7 +31,10 @@ class HomeViewController: UIViewController {
       let contentFrame = CGRect(x: 0, y: kStatusBarH + kNavigationBarH + kTitleViewH, width: kScreenW, height: contentH)
     
         var childVcs = [UIViewController]()
-        for _ in 0..<4 {
+        let recommendVc = RecommendViewController()
+        childVcs.append(recommendVc)
+        
+        for _ in 0..<3 {
             let childVc = UIViewController()
             childVc.view.backgroundColor = UIColor(r: CGFloat(arc4random_uniform(255)), g: CGFloat(arc4random_uniform(255)), b: CGFloat(arc4random_uniform(255)))
             childVcs.append(childVc)
