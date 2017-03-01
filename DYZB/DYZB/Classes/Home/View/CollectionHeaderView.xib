@@ -50,6 +50,9 @@
                 <constraint firstItem="p7P-3z-7nD" firstAttribute="centerY" secondItem="T1p-QU-LUf" secondAttribute="centerY" id="v12-dP-qmz"/>
                 <constraint firstItem="p7P-3z-7nD" firstAttribute="leading" secondItem="T1p-QU-LUf" secondAttribute="trailing" constant="10" id="vvZ-ee-F7h"/>
             </constraints>
+            <connections>
+                <outlet property="sectionTitle" destination="p7P-3z-7nD" id="3Rd-Wb-OYf"/>
+            </connections>
             <point key="canvasLocation" x="-393.5" y="294"/>
         </collectionReusableView>
     </objects>

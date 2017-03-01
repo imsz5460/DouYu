@@ -64,6 +64,9 @@
                 <constraint firstItem="bck-E9-WIU" firstAttribute="top" secondItem="Tup-1p-QsM" secondAttribute="bottom" constant="5" id="z6v-vu-2KN"/>
             </constraints>
             <size key="customSize" width="253" height="190"/>
+            <connections>
+                <outlet property="icon_image" destination="Tup-1p-QsM" id="ryi-YP-gRk"/>
+            </connections>
             <point key="canvasLocation" x="253.5" y="261"/>
         </collectionViewCell>
     </objects>

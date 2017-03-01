@@ -18,9 +18,14 @@ private let kHeaderViewID = "kHeaderViewID"
 private let kPrettyCellID = "kPrettyCellID"
 private let kNormalCellID = "kNormalCellID"
 
+
+
 class RecommendViewController: UIViewController {
 
     //懒加载属性
+    private lazy var anchorGroups: [AnchorGroup] = [AnchorGroup]()
+    
+    
     private lazy var collectionView: UICollectionView = {
        [weak self] in
         
@@ -57,6 +62,9 @@ class RecommendViewController: UIViewController {
         
         
         setUpUI()
+        
+        
+        loadData()
 
         // Do any additional setup after loading the view.
     }
@@ -81,6 +89,33 @@ extension RecommendViewController {
     
 }
 
+extension RecommendViewController {
+    func loadData() {
+        let nowTime = NSDate().timeIntervalSince1970
+        
+        print(nowTime)
+        
+//        http://capi.douyucdn.cn/api/v1/getHotCate?limit=4&offset=0&time=1488167931.49921
+        
+        let parameters = ["limit": "4","offset":"0", "time" :"\(nowTime)"]
+        NetworkTools.requestDate(.GET, URLString: "http://capi.douyucdn.cn/api/v1/getHotCate", parameters: parameters) { (result) in
+            
+            guard let resultDict = result as? [String : NSObject] else { return }
+            guard let resultArray = resultDict["data"] as? [[String: NSObject]] else {return}
+            for dict in resultArray {
+                self.anchorGroups.append(AnchorGroup(dict: dict))
+            }
+            
+
+            
+        }
+        
+    }
+    
+    
+    
+}
+
 //MARK: -UICollectionViewDataSource
 extension RecommendViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -100,15 +135,31 @@ extension RecommendViewController: UICollectionViewDataSource, UICollectionViewD
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        var cell: UICollectionViewCell
+//        var cell: UICollectionViewCell
         
         if indexPath.section == 1 {
-            cell = collectionView.dequeueReusableCellWithReuseIdentifier(kPrettyCellID, forIndexPath: indexPath)
+           let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kPrettyCellID, forIndexPath: indexPath)
+            return cell
         } else {
-            cell = collectionView.dequeueReusableCellWithReuseIdentifier(kNormalCellID, forIndexPath: indexPath) as! CollectionNormalCell
+           let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kNormalCellID, forIndexPath: indexPath) as! CollectionNormalCell
+            if indexPath.section != 0 {
+                let index = indexPath.section - 2
+            let group = self.anchorGroups[index]
+                print(indexPath.section-2)
+                
+                print(indexPath.item)
+                print("---------")
+                print(group.anchors)
+                if index != 1{
+                    cell.anchor = group.anchors[indexPath.item]}
+            }
+            
+            return cell
         }
+        
+        
 //        cell.backgroundColor = UIColor.redColor()
-        return cell
+//        return cell
     }
     
     
