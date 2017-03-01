@@ -24,6 +24,8 @@ class RecommendViewController: UIViewController {
 
     //懒加载属性
     private lazy var anchorGroups: [AnchorGroup] = [AnchorGroup]()
+    private lazy var bigdataGroup: AnchorGroup = AnchorGroup()
+    private lazy var prettyGroup: AnchorGroup = AnchorGroup()
     
     
     private lazy var collectionView: UICollectionView = {
@@ -91,44 +93,117 @@ extension RecommendViewController {
 
 extension RecommendViewController {
     func loadData() {
+        
         let nowTime = NSDate().timeIntervalSince1970
-        
-        print(nowTime)
-        
+      
 //        http://capi.douyucdn.cn/api/v1/getHotCate?limit=4&offset=0&time=1488167931.49921
         
         let parameters = ["limit": "4","offset":"0", "time" :"\(nowTime)"]
-        NetworkTools.requestDate(.GET, URLString: "http://capi.douyucdn.cn/api/v1/getHotCate", parameters: parameters) { (result) in
-            
-            guard let resultDict = result as? [String : NSObject] else { return }
-            guard let resultArray = resultDict["data"] as? [[String: NSObject]] else {return}
-            for dict in resultArray {
-                self.anchorGroups.append(AnchorGroup(dict: dict))
+         //创建队列组
+//        let  group: dispatch_group_t = dispatch_group_create();
+        // 2.创建Group
+        let dGroup = dispatch_group_create()
+        
+        // 3.请求第一部分推荐数据
+        dispatch_group_enter(dGroup)
+        
+        //多次执行耗时的异步操作
+//        dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+        
+            NetworkTools.requestDate(.GET, URLString: "http://capi.douyucdn.cn/api/v1/getbigDataRoom", parameters: ["time" :"\(nowTime)"]) { (result) in
+                
+                guard let resultDict = result as? [String : NSObject] else { return }
+                guard let resultArray = resultDict["data"] as? [[String: NSObject]] else {return}
+                
+                // 3.1.设置组的属性
+                self.bigdataGroup.tag_name = "热门"
+                self.bigdataGroup.icon_name = "home_header_hot"
+                
+                for dict in resultArray {
+                    self.bigdataGroup.anchors.append(AnchorModel(dict: dict))
+                }
+                
+                dispatch_group_leave(dGroup)
             }
-            
+        
+        // 3.3.离开组
+//        }
+        
+        
+        dispatch_group_enter(dGroup)
+        //多次执行耗时的异步操作
+//        dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+        
+            NetworkTools.requestDate(.GET, URLString: "http://capi.douyucdn.cn/api/v1/getVerticalRoom", parameters: parameters) { (result) in
+                
+                self.prettyGroup.tag_name = "颜值"
+                self.prettyGroup.icon_name = "home_header_phone"
+                
+                guard let resultDict = result as? [String : NSObject] else { return }
+                guard let resultArray = resultDict["data"] as? [[String: NSObject]] else {return}
+                for dict in resultArray {
+                    self.prettyGroup.anchors.append(AnchorModel(dict: dict))
+                }
+                
+                // 3.3.离开组
+                dispatch_group_leave(dGroup)
+            }
+        
+//        }
 
+        
+        dispatch_group_enter(dGroup)
+        
+        //多次执行耗时的异步操作
+//        dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+        
+            NetworkTools.requestDate(.GET, URLString: "http://capi.douyucdn.cn/api/v1/getHotCate", parameters: parameters) { (result) in
+                
+                guard let resultDict = result as? [String : NSObject] else { return }
+                guard let resultArray = resultDict["data"] as? [[String: NSObject]] else {return}
+                for dict in resultArray {
+                    self.anchorGroups.append(AnchorGroup(dict: dict))
+                }
+                
+                dispatch_group_leave(dGroup)
+            }
+        
+        
+//        }
+        
+        
+        
+        dispatch_group_notify(dGroup, dispatch_get_global_queue(0,0)) {
+            self.anchorGroups.insert(self.prettyGroup, atIndex: 0)
+            self.anchorGroups.insert(self.bigdataGroup, atIndex: 0)
+            
+            
+            
+            // 1.展示推荐数据
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                self.collectionView.reloadData()
+            })
             
         }
         
+        
     }
-    
-    
-    
 }
+
+    
+
 
 //MARK: -UICollectionViewDataSource
 extension RecommendViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
      func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 12
+        return self.anchorGroups.count
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        if section == 0 {
-            return 8
-        }
-        return 4
+        return self.anchorGroups[section].anchors.count
 
     }
    
@@ -139,20 +214,17 @@ extension RecommendViewController: UICollectionViewDataSource, UICollectionViewD
         
         if indexPath.section == 1 {
            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kPrettyCellID, forIndexPath: indexPath)
+            as! CollectionPrettyCell
+            let group = self.anchorGroups[indexPath.section]
+            cell.anchor = group.anchors[indexPath.item]
             return cell
         } else {
            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kNormalCellID, forIndexPath: indexPath) as! CollectionNormalCell
-            if indexPath.section != 0 {
-                let index = indexPath.section - 2
-            let group = self.anchorGroups[index]
-                print(indexPath.section-2)
+           
                 
-                print(indexPath.item)
-                print("---------")
-                print(group.anchors)
-                if index != 1{
-                    cell.anchor = group.anchors[indexPath.item]}
-            }
+            let group = self.anchorGroups[indexPath.section]
+            cell.anchor = group.anchors[indexPath.item]
+            
             
             return cell
         }
@@ -165,9 +237,12 @@ extension RecommendViewController: UICollectionViewDataSource, UICollectionViewD
     
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
 
-        // 1.取出section的HeaderView
+//         1.取出section的HeaderView
     let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: kHeaderViewID, forIndexPath: indexPath)
-    
+        as! CollectionHeaderView
+        
+        headerView.group = self.anchorGroups[indexPath.section]
+        
     return headerView
     }
 

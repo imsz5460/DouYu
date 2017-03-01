@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E8168CD1E67241300FA5D9C /* CollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8168CC1E67241300FA5D9C /* CollectionHeaderView.xib */; };
 		3EA72B401E5CDC9A00202268 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EA72B3F1E5CDC9A00202268 /* Home.storyboard */; };
 		3EA72B421E5CDE3C00202268 /* Live.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EA72B411E5CDE3C00202268 /* Live.storyboard */; };
 		3EA72B441E5CDEEC00202268 /* Follow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EA72B431E5CDEEC00202268 /* Follow.storyboard */; };
@@ -19,7 +20,6 @@
 		3EA72B531E5E7F5900202268 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA72B521E5E7F5900202268 /* Common.swift */; };
 		3EA72B551E5EE0E700202268 /* PageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA72B541E5EE0E700202268 /* PageContentView.swift */; };
 		3EA72B571E606DC600202268 /* RecommendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA72B561E606DC600202268 /* RecommendViewController.swift */; };
-		3EA72B591E61381200202268 /* CollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EA72B581E61381200202268 /* CollectionHeaderView.xib */; };
 		3EA72B5D1E61A13000202268 /* CollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA72B5C1E61A13000202268 /* CollectionHeaderView.swift */; };
 		3EA72B601E61CB8800202268 /* CollectionNormalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA72B5E1E61CB8800202268 /* CollectionNormalCell.swift */; };
 		3EA72B611E61CB8800202268 /* CollectionNormalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EA72B5F1E61CB8800202268 /* CollectionNormalCell.xib */; };
@@ -37,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		15F8927EF68F6330F023E365 /* Pods-DYZB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DYZB.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DYZB/Pods-DYZB.debug.xcconfig"; sourceTree = "<group>"; };
+		3E8168CC1E67241300FA5D9C /* CollectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionHeaderView.xib; sourceTree = "<group>"; };
 		3EA72B3F1E5CDC9A00202268 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		3EA72B411E5CDE3C00202268 /* Live.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Live.storyboard; sourceTree = "<group>"; };
 		3EA72B431E5CDEEC00202268 /* Follow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Follow.storyboard; sourceTree = "<group>"; };
@@ -49,7 +50,6 @@
 		3EA72B521E5E7F5900202268 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Common.swift; path = Extensions/Common.swift; sourceTree = "<group>"; };
 		3EA72B541E5EE0E700202268 /* PageContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageContentView.swift; sourceTree = "<group>"; };
 		3EA72B561E606DC600202268 /* RecommendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendViewController.swift; sourceTree = "<group>"; };
-		3EA72B581E61381200202268 /* CollectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionHeaderView.xib; sourceTree = "<group>"; };
 		3EA72B5C1E61A13000202268 /* CollectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionHeaderView.swift; sourceTree = "<group>"; };
 		3EA72B5E1E61CB8800202268 /* CollectionNormalCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionNormalCell.swift; sourceTree = "<group>"; };
 		3EA72B5F1E61CB8800202268 /* CollectionNormalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionNormalCell.xib; sourceTree = "<group>"; };
@@ -156,7 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				3EA72B5C1E61A13000202268 /* CollectionHeaderView.swift */,
-				3EA72B581E61381200202268 /* CollectionHeaderView.xib */,
+				3E8168CC1E67241300FA5D9C /* CollectionHeaderView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -418,9 +418,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3EF04C711E5CABFE00150329 /* LaunchScreen.storyboard in Resources */,
-				3EA72B591E61381200202268 /* CollectionHeaderView.xib in Resources */,
 				3EA72B611E61CB8800202268 /* CollectionNormalCell.xib in Resources */,
 				3EF04C6E1E5CABFE00150329 /* Assets.xcassets in Resources */,
+				3E8168CD1E67241300FA5D9C /* CollectionHeaderView.xib in Resources */,
 				3EA72B401E5CDC9A00202268 /* Home.storyboard in Resources */,
 				3EA72B421E5CDE3C00202268 /* Live.storyboard in Resources */,
 				3EF04C6C1E5CABFE00150329 /* Main.storyboard in Resources */,

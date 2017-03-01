@@ -76,6 +76,9 @@
                 <constraint firstItem="lIX-ov-yCt" firstAttribute="top" secondItem="qEu-2d-2KC" secondAttribute="bottom" constant="5" id="x5N-2N-Mzj"/>
             </constraints>
             <size key="customSize" width="182" height="215"/>
+            <connections>
+                <outlet property="icon_image" destination="qEu-2d-2KC" id="Vaf-4h-Gcr"/>
+            </connections>
             <point key="canvasLocation" x="311" y="246.5"/>
         </collectionViewCell>
     </objects>

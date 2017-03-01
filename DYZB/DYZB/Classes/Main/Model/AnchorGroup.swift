@@ -27,6 +27,10 @@ class AnchorGroup: NSObject {
     
     var anchors: [AnchorModel] = [AnchorModel]()
     
+    override init() {
+        
+    }
+    
     init(dict: [String: NSObject]) {
         super.init()
         setValuesForKeysWithDictionary(dict)
