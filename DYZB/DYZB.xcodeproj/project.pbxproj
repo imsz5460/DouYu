@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E390A611E6950A7004AF74D /* RecommendVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E390A601E6950A7004AF74D /* RecommendVM.swift */; };
 		3E8168CD1E67241300FA5D9C /* CollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8168CC1E67241300FA5D9C /* CollectionHeaderView.xib */; };
 		3EA72B401E5CDC9A00202268 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EA72B3F1E5CDC9A00202268 /* Home.storyboard */; };
 		3EA72B421E5CDE3C00202268 /* Live.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EA72B411E5CDE3C00202268 /* Live.storyboard */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		15F8927EF68F6330F023E365 /* Pods-DYZB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DYZB.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DYZB/Pods-DYZB.debug.xcconfig"; sourceTree = "<group>"; };
+		3E390A601E6950A7004AF74D /* RecommendVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendVM.swift; sourceTree = "<group>"; };
 		3E8168CC1E67241300FA5D9C /* CollectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionHeaderView.xib; sourceTree = "<group>"; };
 		3EA72B3F1E5CDC9A00202268 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		3EA72B411E5CDE3C00202268 /* Live.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Live.storyboard; sourceTree = "<group>"; };
@@ -80,6 +82,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E390A5F1E695074004AF74D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				3E390A601E6950A7004AF74D /* RecommendVM.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		3EA72B261E5CD3C600202268 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +140,7 @@
 			children = (
 				3EA72B2D1E5CD3C600202268 /* Model */,
 				3EA72B2E1E5CD3C600202268 /* View */,
+				3E390A5F1E695074004AF74D /* ViewModel */,
 				3EA72B2C1E5CD3C600202268 /* Controller */,
 			);
 			path = Home;
@@ -492,6 +503,7 @@
 				3EA72B571E606DC600202268 /* RecommendViewController.swift in Sources */,
 				3EA72B481E5CDF7E00202268 /* MainViewController.swift in Sources */,
 				3EA72B551E5EE0E700202268 /* PageContentView.swift in Sources */,
+				3E390A611E6950A7004AF74D /* RecommendVM.swift in Sources */,
 				3EA72B4F1E5DF42A00202268 /* PageTitleView.swift in Sources */,
 				3EA72B4D1E5DA49D00202268 /* UIBarButtonItem-extension.swift in Sources */,
 				3EA72B4A1E5DA1AC00202268 /* HomeViewController.swift in Sources */,

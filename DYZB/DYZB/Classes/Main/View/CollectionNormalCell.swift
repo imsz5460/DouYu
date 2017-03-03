@@ -16,7 +16,7 @@ class CollectionNormalCell: UICollectionViewCell {
     var anchor: AnchorModel? {
         didSet {
             
-             guard let anchor = anchor else { return }
+            guard let anchor = anchor else { return }
             // 3.设置封面图片
             guard let iconURL = NSURL(string: anchor.vertical_src) else { return }
             icon_image.kf_setImageWithURL(iconURL)

@@ -33,7 +33,10 @@ class PageContentView: UIView {
         
         // 2.创建UICollectionView
         let collectionview = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
-        collectionview.bounces = false
+        collectionview.backgroundColor = UIColor.whiteColor()
+        
+        
+//        collectionview.bounces = false
         collectionview.dataSource = self
         
         collectionview.delegate = self
@@ -75,6 +78,9 @@ extension PageContentView {
         //添加collectionview
         addSubview(collectionview)
         collectionview.frame = bounds
+        
+        
+        
         
     }
     

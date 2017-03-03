@@ -157,45 +157,48 @@ extension PageTitleView {
 // MARK:- 对外暴露的方法
 extension PageTitleView {
     func changeLabel(progress: CGFloat) {
+//        开启弹簧效果时的过滤处理
+        var progress = progress > 0 ? progress : 0
+         progress = progress <= CGFloat(titleLabels.count - 1) ? progress : CGFloat(titleLabels.count - 1)
         
-        var sourceLabelIndex = Int(floor(progress))
-        let ratio = progress - CGFloat(sourceLabelIndex)
+        var leftLabelIndex = Int(floor(progress))
+        let ratio = progress - CGFloat(leftLabelIndex)
         
-        //获取sourceLabel和targetLabel
-        let sourceLabel = titleLabels[sourceLabelIndex]
+        //获取leftLabel和rightLabel
+        let leftLabel = titleLabels[leftLabelIndex]
         
-        if sourceLabelIndex >= 3{
-            sourceLabelIndex = 3
+        if leftLabelIndex >= 3{
+            leftLabelIndex = 3
         }
         
-        print("sourceLabelIndex = \(sourceLabelIndex)")
-        var targetIndex = sourceLabelIndex + 1
-        if targetIndex >= 3{
-            targetIndex = 3
+        print("leftLabelIndex = \(leftLabelIndex)")
+        var rightIndex = leftLabelIndex + 1
+        if rightIndex >= 3{
+            rightIndex = 3
         }
-        print("targetIndex = \(targetIndex)")
-        let targetLabel = titleLabels[targetIndex]
+        print("rightIndex = \(rightIndex)")
+        let rightLabel = titleLabels[rightIndex]
         
         //滑块的逻辑
-        let moveTotalX = sourceLabel.frame.width
+        let moveTotalX = leftLabel.frame.width
         let moveX = moveTotalX * ratio
         
-        scrollLine.frame.origin.x = sourceLabel.frame.origin.x + moveX
+        scrollLine.frame.origin.x = leftLabel.frame.origin.x + moveX
         
         //3.Label颜色的渐变
         // 3.1.取出变化的范围
         let colorDelta = (kSelectedColor.0 - kNormalColor.0, kSelectedColor.1 - kNormalColor.1, kSelectedColor.2 - kNormalColor.2)
         
-        if sourceLabelIndex != targetIndex {
-        // 3.2.变化sourceLabel
-        sourceLabel.textColor = UIColor(r: kSelectedColor.0 - colorDelta.0 * ratio, g: kSelectedColor.1 - colorDelta.1 * ratio, b: kSelectedColor.2 - colorDelta.2 * ratio)
+        if leftLabelIndex != rightIndex {
+        // 3.2.变化leftLabel
+        leftLabel.textColor = UIColor(r: kSelectedColor.0 - colorDelta.0 * ratio, g: kSelectedColor.1 - colorDelta.1 * ratio, b: kSelectedColor.2 - colorDelta.2 * ratio)
         
-        // 3.2.变化targetLabel
-        targetLabel.textColor = UIColor(r: kNormalColor.0 + colorDelta.0 * ratio, g: kNormalColor.1 + colorDelta.1 * ratio, b: kNormalColor.2 + colorDelta.2 * ratio)
+        // 3.2.变化rightLabel
+        rightLabel.textColor = UIColor(r: kNormalColor.0 + colorDelta.0 * ratio, g: kNormalColor.1 + colorDelta.1 * ratio, b: kNormalColor.2 + colorDelta.2 * ratio)
         }
         
         // 4.记录最新的index
-        currentIndex = sourceLabelIndex
+        currentIndex = leftLabelIndex
     }
 }
 
